@@ -1,4 +1,4 @@
-package com.github.rinotc.http.server
+package com.github.rinotc.http.message
 
 import java.nio.charset.StandardCharsets
 import scala.collection.mutable
