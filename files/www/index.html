@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SIMPLE HTTP SERVER</title>
+<meta charset="UTF-8">
+<link href="/css/style.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+<script>
+$(document).ready(function() {
+	var $ul = $('#posted-list');
+	$('#echo-form').submit(function(e) {
+		e.preventDefault();
+		
+		var values = $(this).serializeArray();
+		$.post(this.action, values)
+		.done(function(data) {
+			$('<li>' + data + '</li>').appendTo($ul);
+		});
+	});
+});
+</script>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Index</h1>
+		
+		<h4>GET</h4>
+		<ul class="links">
+			<li><a href="./about.html">about this program</a></li>
+			<li><a href="./path/to/unknown.html">unknown path (/path/to/unknown.html) </a></li>
+		</ul>
+		
+		<h4>POST</h4>
+		<form id="echo-form" action="/webapp/echo" method="post" style="padding-left: 40px;">
+			<input type="text" name="text" value="hello" />
+			<button type="submit" class="btn">POST</button>
+		</form>
+		
+		<h5>POSTed value</h5>
+		<div>
+			<ul id="posted-list" style="list-style: none;">
+			</ul>
+		</div>
+
+		<h4>Chunked Response</h4>
+		<a href="./chunked/sample.txt">sample.txt</a>
+	</div>
+</body>
+</html>

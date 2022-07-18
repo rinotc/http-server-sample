@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SIMPLE HTTP SERVER - echo -</title>
+<meta charset="UTF-8">
+<link href="/css/style.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+<script>
+$(document).ready(function() {
+	var $ul = $('#posted-list');
+	$('#echo-form').submit(function(e) {
+		e.preventDefault();
+		
+		var values = $(this).serializeArray();
+		$.post(this.action, values)
+		.done(function(data) {
+			$('<li>' + data + '</li>').appendTo($ul);
+		});
+	});
+});
+</script>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Echo POST message</h1>
+		
+		<form id="echo-form" action="/webapp/echo" method="post" style="padding-left: 40px;">
+			<input type="text" name="text" value="hello" />
+			<button type="submit" class="btn">POST</button>
+		</form>
+		
+		<h4>POSTed value</h4>
+		<div>
+			<ul id="posted-list" style="list-style: none;">
+			</ul>
+		</div>
+		
+		<a href="/">Go Back to Index Page</a>
+	</div>
+</body>
+</html>

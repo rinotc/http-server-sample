@@ -11,7 +11,7 @@ class Request(
     val target: String,
     val version: String
 ) extends AbstractHttpMessage {
-  override protected def startLine: String = {
+  override def startLine: String = {
     s"$method $target $version"
   }
 }
@@ -23,10 +23,6 @@ object Request {
   private val HeaderPattern: Regex = "^(?<name>\\S+):[ \\t]?(?<value>.+)[ \\t]?$".r
 
   private val EMPTY = ""
-
-  private val SP = " "
-
-  private val CRLF = "\r\n"
 
   def parseRequest(in: InputStream): Request = {
     val br      = new BufferedReader(new InputStreamReader(in))

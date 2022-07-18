@@ -18,7 +18,7 @@ abstract class AbstractHttpMessage(
 
   def getBody: Array[Byte] = this.body
 
-  protected def startLine: String
+  def startLine: String
 
   override def toString: String = {
     val bodyString = new String(body, StandardCharsets.UTF_8)
