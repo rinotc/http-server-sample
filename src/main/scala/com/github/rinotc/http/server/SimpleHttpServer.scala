@@ -35,17 +35,13 @@ object SimpleHttpServer:
   }
 
   def main(args: Array[String]): Unit =
-    try {
-      val server = new ServerSocket(Port)
-      println("SERVER START: ")
-      println(s"LISTENING ON: ${server.getLocalSocketAddress}")
+    val server = new ServerSocket(Port)
+    println("SERVER START: ")
+    println(s"LISTENING ON: ${server.getLocalSocketAddress}")
 
-      val executor = Executors.newCachedThreadPool()
+    val executor = Executors.newCachedThreadPool()
 
-      while (true) {
-        val socket = server.accept()
-        executor.submit(new WorkerThread(socket))
-      }
-    } catch {
-      case e: Throwable => e.printStackTrace()
+    while (true) {
+      val socket = server.accept()
+      executor.submit(new WorkerThread(socket))
     }

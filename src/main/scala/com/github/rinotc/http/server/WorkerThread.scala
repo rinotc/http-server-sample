@@ -6,12 +6,14 @@ import com.github.rinotc.http.webapp.{Controller, Router}
 import java.io.{IOException, InputStream, OutputStream}
 import java.net.Socket
 import java.text.SimpleDateFormat
-import java.time.LocalDate
+import java.time.{LocalDate, LocalDateTime}
 import scala.util.{Failure, Success, Try}
 
 class WorkerThread(
     private val socket: Socket
 ) extends Thread {
+
+  println("new WorkerThread")
 
   override def run(): Unit = {
     try {
@@ -43,7 +45,7 @@ class WorkerThread(
    *   レスポンスコード
    */
   private def accessLog(requestLine: String, responseCode: Int): Unit = {
-    val date = LocalDate.now()
+    val date = LocalDateTime.now()
     println(s"$date $requestLine $responseCode")
   }
 
@@ -54,7 +56,7 @@ class WorkerThread(
    *   エラーメッセージ
    */
   private def errorLog(message: String, e: Throwable): Unit = {
-    val date = LocalDate.now()
+    val date = LocalDateTime.now()
     println(s"[$date] [ERROR] $message")
     e.printStackTrace()
   }
