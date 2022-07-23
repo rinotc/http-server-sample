@@ -11,11 +11,11 @@ import scala.util.{Failure, Success, Try}
 object Router {
   final val CONTROLLER_PACKAGE_NAME = "com.github.rinotc.http.webapp.controller"
 
-  private val routingTable: Map[String, Controller] = {
+  val routingTable: Map[String, Controller] = {
     val classLoader = Thread.currentThread().getContextClassLoader
     assert(classLoader != null, "classLoader must not be null")
     val resource = classLoader.getResource(CONTROLLER_PACKAGE_NAME.replace('.', '/'))
-    Try(Paths.get(resource.toURI)) match
+    val tbl = Try(Paths.get(resource.toURI)) match
       case Failure(_) => Map.empty
       case Success(packageDir) =>
         val table = mutable.HashMap.empty[String, Controller]
@@ -31,19 +31,28 @@ object Router {
                 case _                      => ()
               }
             } catch {
-              case e: InstantiationError     => println(e) // do nothing
-              case e: IllegalAccessException => println(e)
-              case e: ClassNotFoundException => println(e)
+              case e: InstantiationError     => e.printStackTrace()
+              case e: IllegalAccessException => e.printStackTrace()
+              case e: ClassNotFoundException => e.printStackTrace()
             }
           }
         } catch {
-          case _: IOException => println("fail loading routed classes.")
+          case e: IOException =>
+            println("fail loading routed classes.")
+            e.printStackTrace()
         }
         table.toMap
+
+    println(tbl)
+    tbl
   }
 
   def route(path: String): Controller = {
     val normalized = Paths.get(path).normalize().toString
-    routingTable.find { case (path, _) => normalized.startsWith(path) }.map(_._2).getOrElse(new BasicHttpController)
+    println(s"route, normalized: $normalized")
+    val rt =
+      routingTable.find { case (path, _) => normalized.startsWith(path) }.map(_._2).getOrElse(new BasicHttpController)
+    println(rt)
+    rt
   }
 }

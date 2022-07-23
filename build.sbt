@@ -9,3 +9,10 @@ lazy val root = (project in file("."))
       "org.scalatest" %% "scalatest" % "3.2.12" % Test
     )
   )
+
+lazy val `http-server-akka` = (project in file("http-server-akka"))
+  .settings(
+    name := "http-server-akka",
+    libraryDependencies ++= Seq(
+    )
+  )

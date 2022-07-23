@@ -13,7 +13,8 @@ import java.nio.file.{Files, Paths}
 import scala.util.Try
 
 class BasicHttpController extends Controller {
-  import BasicHttpController._
+
+  private val ProtocolVersion = "HTTP/1.1"
 
   override val path: String = "/"
 
@@ -28,7 +29,7 @@ class BasicHttpController extends Controller {
   override def doPost(request: Request): Response = {
     val body = new String(request.getBody, StandardCharsets.UTF_8)
     println(s"POST body: $body")
-    new Response(protocolVersion, Status.NO_CONTENT)
+    new Response(ProtocolVersion, Status.NO_CONTENT)
   }
 
   /**
@@ -43,7 +44,7 @@ class BasicHttpController extends Controller {
     var target = Paths.get(SimpleHttpServer.documentRoot, request.target).normalize()
 
     if (!target.startsWith(SimpleHttpServer.documentRoot)) {
-      return new Response(protocolVersion, Status.BAD_REQUEST)
+      return new Response(ProtocolVersion, Status.BAD_REQUEST)
     }
 
     if (Files.isDirectory(target)) {
@@ -51,7 +52,7 @@ class BasicHttpController extends Controller {
     }
 
     val response = Try {
-      val response = new Response(protocolVersion, Status.OK)
+      val response = new Response(ProtocolVersion, Status.OK)
       response.setBody(Files.readAllBytes(target))
       response.addHeaderField("Content-Length", response.getBody.length.toString)
 
@@ -61,7 +62,7 @@ class BasicHttpController extends Controller {
       response.addHeaderField("Content-Type", contentType)
       response
     }.toEither.left.map { case _: IOException =>
-      val response = new Response(protocolVersion, Status.NOT_FOUND)
+      val response = new Response(ProtocolVersion, Status.NOT_FOUND)
       response.setBody(SimpleHttpServer.readErrorPage(Status.NOT_FOUND))
       response.addHeaderField("Content-Length", response.getBody.length.toString)
       response
@@ -70,9 +71,4 @@ class BasicHttpController extends Controller {
     response.unwrap
   }
 
-}
-
-object BasicHttpController {
-
-  val protocolVersion = "HTTP/1.1"
 }
