@@ -6,3 +6,5 @@ object EitherExtension:
     def unwrap = either match
       case Left(value)  => value
       case Right(value) => value
+
+end EitherExtension
