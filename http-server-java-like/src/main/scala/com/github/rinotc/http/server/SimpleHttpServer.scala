@@ -7,12 +7,12 @@ import java.io.InputStream
 import java.net.ServerSocket
 import java.nio.file.{Files, Path, Paths}
 import java.time.LocalDateTime
-import scala.util.Try
+import scala.util.{Failure, Success, Try}
 import scala.concurrent.{ExecutionContext, Future}
 import scala.concurrent.ExecutionContext.global
 
 object SimpleHttpServer {
-  val Port = 8080
+  val Port = 8081
 
   val documentRoot: String = Paths.get(System.getProperty("user.dir"), "files", "www").toString
 
@@ -78,13 +78,25 @@ object SimpleHttpServer {
     println(s"LISTENING ON: ${server.getLocalSocketAddress}")
 
     while (true) {
+      println("受付中")
       val socket = server.accept()
+      println(s"受け付けた: $socket")
       Future {
-        val in       = socket.getInputStream
-        val out      = socket.getOutputStream
+        val in  = socket.getInputStream
+        val out = socket.getOutputStream
+        println("handleRequest----")
         val response = handleRequest(in)
+        println("response: ")
+        println(response)
         out.write(response.serializeResponse())
         out.flush()
-      }.onComplete(_ => socket.close())
+      }.onComplete {
+        case Failure(exception) =>
+          exception.printStackTrace()
+          socket.close()
+        case Success(_) =>
+          println("Complete!!")
+          socket.close()
+      }
     }
 }

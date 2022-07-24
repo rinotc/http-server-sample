@@ -7,7 +7,8 @@ class Response(
     private val status: Status
 ) extends AbstractHttpMessage {
 
-  private val CRLF = "\r\n"
+//  private val CRLF = "\r\n"
+  private val LF = "\n"
 
   val statusCode: Int = status.code
 
@@ -19,11 +20,11 @@ class Response(
   def serializeResponse(): Array[Byte] = {
     val message: ByteArrayOutputStream = new ByteArrayOutputStream
 
-    message.write(s"$version $statusCode $reasonPhrase $CRLF".getBytes())
+    message.write(s"$version $statusCode $reasonPhrase $LF".getBytes())
     headers.foreachEntry { case (key, value) =>
-      message.write(s"$key: $value $CRLF".getBytes())
+      message.write(s"$key: $value $LF".getBytes())
     }
-    message.write(CRLF.getBytes())
+    message.write(LF.getBytes())
 
     // ボディはファイルから読み取ったバイト列をそのまま書き込む
     message.write(body)

@@ -89,7 +89,7 @@ object Request {
       while (chunkSize > 0) {
         val chunk = Array.emptyCharArray
         br.read(chunk, 0, chunkSize)
-        br.skip(2) // CRLF
+        br.skip(1) // LF
         body.write(String.valueOf(chunk).getBytes())
         length += chunk.length
 
@@ -105,7 +105,8 @@ object Request {
 
   private def parseSimpleBody(br: BufferedReader, request: Request): Unit = {
     val contentLength = request.headers("content-length").toInt
-    val body          = Array.emptyCharArray
+    val body          = new Array[Char](contentLength)
+    println(contentLength)
     br.read(body, 0, contentLength)
     request.setBody(String.valueOf(body).getBytes())
   }
