@@ -43,16 +43,16 @@ object Router {
         }
         table.toMap
 
-    println(tbl)
+    println("Controllerテーブル-------------------")
+    tbl.foreach { case (path, ctl) => println(s"$path -> ${ctl.getClass.getSimpleName}") }
+    println("-------------------------------------")
     tbl
   }
 
   def route(path: String): Controller = {
     val normalized = Paths.get(path).normalize().toString
-    println(s"route, normalized: $normalized")
     val rt =
       routingTable.find { case (path, _) => normalized.startsWith(path) }.map(_._2).getOrElse(new BasicHttpController)
-    println(rt)
     rt
   }
 }

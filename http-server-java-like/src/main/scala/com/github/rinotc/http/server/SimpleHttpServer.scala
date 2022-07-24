@@ -78,16 +78,13 @@ object SimpleHttpServer {
     println(s"LISTENING ON: ${server.getLocalSocketAddress}")
 
     while (true) {
-      println("受付中")
+      println("受付中...")
       val socket = server.accept()
       println(s"受け付けた: $socket")
       Future {
-        val in  = socket.getInputStream
-        val out = socket.getOutputStream
-        println("handleRequest----")
+        val in       = socket.getInputStream
+        val out      = socket.getOutputStream
         val response = handleRequest(in)
-        println("response: ")
-        println(response)
         out.write(response.serializeResponse())
         out.flush()
       }.onComplete {

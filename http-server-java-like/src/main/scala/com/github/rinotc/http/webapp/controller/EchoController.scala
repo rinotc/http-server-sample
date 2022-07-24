@@ -34,7 +34,6 @@ class EchoController extends Controller {
   override def doGet(request: Request): Response = echo(request)
 
   private def echo(request: Request): Response = {
-    println("echo")
     val response = new Response(ProtocolVersion, Status.OK)
     response.setBody(request.getBody)
     response.addHeaderField("Content-Length", response.getBody.length.toString)

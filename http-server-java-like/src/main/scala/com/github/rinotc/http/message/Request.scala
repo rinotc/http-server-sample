@@ -106,7 +106,6 @@ object Request {
   private def parseSimpleBody(br: BufferedReader, request: Request): Unit = {
     val contentLength = request.headers("content-length").toInt
     val body          = new Array[Char](contentLength)
-    println(contentLength)
     br.read(body, 0, contentLength)
     request.setBody(String.valueOf(body).getBytes())
   }
