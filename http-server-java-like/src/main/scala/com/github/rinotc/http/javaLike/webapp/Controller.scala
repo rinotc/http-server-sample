@@ -1,7 +1,7 @@
-package com.github.rinotc.http.webapp
+package com.github.rinotc.http.javaLike.webapp
 
-import com.github.rinotc.http.message.Method.{CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE}
-import com.github.rinotc.http.message.{Request, Response}
+import com.github.rinotc.http.javaLike.message.{Request, Response}
+import com.github.rinotc.http.javaLike.message.Method.{CONNECT, DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE}
 
 abstract class Controller {
 

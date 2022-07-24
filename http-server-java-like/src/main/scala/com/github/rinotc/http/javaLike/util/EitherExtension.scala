@@ -1,4 +1,4 @@
-package com.github.rinotc.http.util
+package com.github.rinotc.http.javaLike.util
 
 object EitherExtension:
 

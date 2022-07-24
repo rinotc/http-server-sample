@@ -1,11 +1,10 @@
-package com.github.rinotc.http.webapp.controller
+package com.github.rinotc.http.javaLike.webapp.controller
 
-import com.github.rinotc.http.message.Status
-import com.github.rinotc.http.message.{Request, Response}
-import com.github.rinotc.http.server.SimpleHttpServer
-import com.github.rinotc.http.webapp.Controller
-import com.github.rinotc.http.util.StringExtension.fileExtension
-import com.github.rinotc.http.util.EitherExtension.unwrap
+import com.github.rinotc.http.javaLike.message.{Request, Response, Status}
+import com.github.rinotc.http.javaLike.server.SimpleHttpServer
+import com.github.rinotc.http.javaLike.webapp.Controller
+import com.github.rinotc.http.javaLike.util.StringExtension.fileExtension
+import com.github.rinotc.http.javaLike.util.EitherExtension.unwrap
 
 import java.io.IOException
 import java.nio.charset.StandardCharsets

@@ -1,7 +1,7 @@
-package com.github.rinotc.http.webapp.controller
+package com.github.rinotc.http.javaLike.webapp.controller
 
-import com.github.rinotc.http.message.{Request, Response}
-import com.github.rinotc.http.webapp.Controller
+import com.github.rinotc.http.javaLike.message.{Request, Response}
+import com.github.rinotc.http.javaLike.webapp.Controller
 
 import java.io.{ByteArrayOutputStream, IOException}
 import java.util

@@ -1,7 +1,6 @@
-package com.github.rinotc.http.webapp
+package com.github.rinotc.http.javaLike.webapp
 
-import com.github.rinotc.http.webapp.controller.BasicHttpController
-
+import com.github.rinotc.http.javaLike.webapp.controller.BasicHttpController
 import java.io.IOException
 import java.nio.file.{Files, Paths}
 import scala.collection.mutable

@@ -1,4 +1,4 @@
-package com.github.rinotc.http.exception
+package com.github.rinotc.http.javaLike.exception
 
 class ParseException(private val requestLine: String) extends Exception(s"cannot parser request line: $requestLine") {
 

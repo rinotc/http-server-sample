@@ -1,4 +1,4 @@
-package com.github.rinotc.http.message
+package com.github.rinotc.http.javaLike.message
 
 enum Status(val code: Int, val reasonPhrase: String):
   case OK extends Status(200, "OK")

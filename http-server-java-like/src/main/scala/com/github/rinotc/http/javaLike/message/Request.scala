@@ -1,7 +1,6 @@
-package com.github.rinotc.http.message
+package com.github.rinotc.http.javaLike.message
 
-import com.github.rinotc.http.exception.ParseException
-import com.github.rinotc.http.message.AbstractHttpMessage
+import com.github.rinotc.http.javaLike.exception.ParseException
 
 import java.io.{BufferedReader, ByteArrayOutputStream, InputStream, InputStreamReader}
 import scala.util.matching.Regex

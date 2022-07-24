@@ -1,9 +1,7 @@
-package com.github.rinotc.http.webapp.controller
+package com.github.rinotc.http.javaLike.webapp.controller
 
-import com.github.rinotc.http.message.{Request, Response}
-import com.github.rinotc.http.webapp.Controller
-
-import com.github.rinotc.http.message.Status
+import com.github.rinotc.http.javaLike.message.{Request, Response, Status}
+import com.github.rinotc.http.javaLike.webapp.Controller
 
 /**
  * リクエストボディをそのまま返すコントローラ

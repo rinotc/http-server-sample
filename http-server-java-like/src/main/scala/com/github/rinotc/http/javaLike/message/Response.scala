@@ -1,4 +1,4 @@
-package com.github.rinotc.http.message
+package com.github.rinotc.http.javaLike.message
 
 import java.io.ByteArrayOutputStream
 

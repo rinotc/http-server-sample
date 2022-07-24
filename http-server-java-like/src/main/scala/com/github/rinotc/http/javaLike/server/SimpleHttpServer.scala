@@ -1,7 +1,7 @@
-package com.github.rinotc.http.server
+package com.github.rinotc.http.javaLike.server
 
-import com.github.rinotc.http.message.{Request, Response, Status}
-import com.github.rinotc.http.webapp.{Controller, Router}
+import com.github.rinotc.http.javaLike.message.{Request, Response, Status}
+import com.github.rinotc.http.javaLike.webapp.{Controller, Router}
 
 import java.io.InputStream
 import java.net.ServerSocket
