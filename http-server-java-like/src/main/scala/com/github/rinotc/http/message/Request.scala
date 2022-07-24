@@ -80,6 +80,7 @@ object Request {
   }
 
   private def parseChunkedBody(br: BufferedReader, request: Request): Unit = {
+    println("Parse Chunked Body!!")
     val transferEncoding = request.headers("transfer-encoding")
     if (transferEncoding == "chunked") {
       var length       = 0

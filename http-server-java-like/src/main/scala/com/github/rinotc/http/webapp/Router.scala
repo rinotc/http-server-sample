@@ -53,6 +53,8 @@ object Router {
     val normalized = Paths.get(path).normalize().toString
     val rt =
       routingTable.find { case (path, _) => normalized.startsWith(path) }.map(_._2).getOrElse(new BasicHttpController)
+
+    println(s"selected controller: ${rt.getClass.getSimpleName}")
     rt
   }
 }

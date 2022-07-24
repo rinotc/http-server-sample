@@ -26,7 +26,7 @@ class ChunkedResponseController extends Controller {
    * @return
    *   HTTP Response
    */
-  override def doPost(request: Request): Response = chunk(basicController.doPost(request))
+  override def doPost(request: Request): Response = basicController.doPost(request)
 
   /**
    * GET リクエストを受け取った場合に実行されるメソッド
@@ -36,7 +36,7 @@ class ChunkedResponseController extends Controller {
    * @return
    *   HTTP Response
    */
-  override def doGet(request: Request): Response = basicController.doGet(request)
+  override def doGet(request: Request): Response = chunk(basicController.doGet(request))
 
   private def chunk(response: Response): Response =
     val body = response.getBody
