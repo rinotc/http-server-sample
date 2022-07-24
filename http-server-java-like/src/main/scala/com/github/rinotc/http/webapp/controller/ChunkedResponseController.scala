@@ -42,7 +42,7 @@ class ChunkedResponseController extends Controller {
     val body = response.getBody
 
     val out = new ByteArrayOutputStream()
-    Try {
+    val result = Try {
       var offset     = 0
       val bodyLength = body.length
       while (offset < bodyLength) {
@@ -57,7 +57,8 @@ class ChunkedResponseController extends Controller {
       out.write("0".getBytes())
       out.write(LF)
       out.write(LF)
-    } match {
+    }
+    (result: @unchecked) match {
       case Success(_) =>
         response.headers.remove("Content-Length")
         response.addHeaderField("Transfer-Encoding", "chunked")
